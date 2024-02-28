@@ -2,7 +2,7 @@
   "name": "NewsOfTheWorldBackend",
   "version": "1.0.0",
   "description": "Backend for NewsOfTheWorld",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
     "start": "node server",
     "dev": "nodemon server"

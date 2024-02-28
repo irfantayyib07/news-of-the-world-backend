@@ -8,7 +8,4 @@ router.route("/")
  .put(newsController.updateNews)
  .delete(newsController.deleteNews);
 
-router.route("/:id")
- .get(newsController.getNews);
-
 module.exports = router;

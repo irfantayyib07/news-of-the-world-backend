@@ -3,7 +3,7 @@ const path = require('path');
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const corsOption = require("./config/corsConfig");
+const corsOption = require("../config/corsConfig");
 const mongoose = require("mongoose");
 const PORT = process.env.PORT || 3500;
 
@@ -20,9 +20,8 @@ connectDb();
 app.use(cors(corsOption));
 app.use(express.urlencoded({ extended: false })); // for form data
 app.use(express.json());
-app.use(express.static(path.join(__dirname, '/public')));
 
-app.use("/", require("./routes/root"));
+app.use("/", require("../routes/root"));
 
 app.all("*", (req, res) => {
  res.status(404);
