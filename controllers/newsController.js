@@ -20,7 +20,7 @@ const getNews = async (req, res) => {
   articles: filteredNews
  }
 
- res.json(result);
+ res.status(200).json(result);
 };
 
 const createNews = async (req, res) => {
