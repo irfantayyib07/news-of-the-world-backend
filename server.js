@@ -13,7 +13,7 @@ const connectDb = async () => {
  } catch (err) {
   console.log(err);
  }
-}
+};
 
 connectDb();
 
@@ -41,4 +41,16 @@ mongoose.connection.once("open", () => {
  app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 });
 
-module.exports = connectDb
+// const fs = require("fs");
+// const News = require("./model/News");
+
+// fs.readdir(path.join(__dirname, "toupload"), "utf-8", async (err, files) => {
+//  const promises = [];
+//  files.forEach(file => {
+//   fs.readFile(path.join(__dirname, "toupload", file), "utf-8", (err, content) => {
+//    promises.push(News.create(JSON.parse(content).data));
+//   });
+//  });
+//  await Promise.all(promises);
+//  console.log("Upload successful!");
+// });

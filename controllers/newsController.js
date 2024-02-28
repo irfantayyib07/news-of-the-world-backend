@@ -1,22 +1,22 @@
 const News = require("../model/News");
 
 const getNews = async (req, res) => {
- const country = req.query.country || "us";
  const category = req.query.category || "general";
+ const country = req.query.country || "us";
  const pageSize = +req.query.pageSize || 12;
  const page = +req.query.page || 1;
 
- const news = await News.find();
- if (!news) return res.status(204).json({ message: "No news found in the current category-country combination!" });
+ const news = await News.find({ category, country });
+ if (news.length === 0) return res.status(204).json({ message: "No news found in the current category-country combination!" });
  
- const filteredNews = news.filter((item, i) => {
-  console.log(i <= (page * pageSize) - 1);
+ const filteredNews = news[0].articles.filter((item, i) => {
+  // console.log(i <= (page * pageSize) - 1);
   return i <= (page * pageSize) - 1;
  }).slice(page === 1 ? 0 : page * pageSize - pageSize);
 
  const result = {
   status: "ok",
-  totalResults: news.length,
+  totalResults: news[0].articles.length,
   articles: filteredNews
  }
 
@@ -24,12 +24,13 @@ const getNews = async (req, res) => {
 };
 
 const createNews = async (req, res) => {
- if (req?.body?.articles.length === 0) {
+ if (req?.body?.data?.articles.length === 0) {
   return res.status(400).json({ message: "No news found!" });
  }
 
  try {
-  const result = await News.create(req.body.articles);
+  console.log(req.body.data);
+  const result = await News.create(req.body.data);
 
   res.status(201).json(result);
  } catch (err) {
